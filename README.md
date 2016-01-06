@@ -8,7 +8,7 @@ $python whitelist.py
 在settings.py中配置阿里云 SDK的账号，以及ECS服务器所在区域。
 
 IP白名单服务：
-http://127.0.0.1:5001/list 
+http://127.0.0.1:5001/list
 
 返回值说明：
 得到白名单列表，每个IP地址之间以空格分割；白名单包含：
@@ -21,3 +21,5 @@ http://127.0.0.1:5001/list
 注意事项：
 当调用白名单服务的机器的IP地址在白名单内时，/list才会返回正确的IP列表，否则返回-1。
 
+centos上需要安装libxslt-devel:
+$sudo yum install libxslt-devel
