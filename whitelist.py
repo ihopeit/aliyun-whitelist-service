@@ -27,6 +27,7 @@ def aliyun_ecs_list():
 	from aliyunsdkecs.request.v20140526 import DescribeInstancesRequest
 	clt = client.AcsClient(appKey,appSecret, zone)
 	request = DescribeInstancesRequest.DescribeInstancesRequest()
+	request.add_query_param('pagesize',100)
 	result = clt.do_action(request)
 
 	from pyquery import PyQuery as pq
