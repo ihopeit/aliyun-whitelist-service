@@ -1,4 +1,5 @@
 from flask import Flask, request
+import flask
 
 app = Flask(__name__, static_url_path='')
 
@@ -16,8 +17,9 @@ def allow(ip):
 def list():
 	#print(request.remote_addr)
 	if not allow(request.remote_addr):
-		return "-1"
-	return white_list + ' ' +  aliyun_ecs_list()
+		return flask.jsonify(errorcode='-1', errormessage='', whitelist={})
+	list_str = white_list + ' ' +  aliyun_ecs_list()
+	return flask.jsonify(errorcode='0', errormessage='', whitelist=list_str.split())
 
 def aliyun_ecs_list():
 	from aliyunsdkcore import client
