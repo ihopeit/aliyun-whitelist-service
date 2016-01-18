@@ -15,7 +15,6 @@ def allow(ip):
 	return ip in white_list or (white_ip_prefix and ip.startswith(white_ip_prefix))
 
 @app.route('/list')
-@MemoizeWithTimeout(timeout=60)
 def list():
 	#print(request.remote_addr)
 	if not allow(request.remote_addr):
@@ -23,6 +22,7 @@ def list():
 	list_str = white_list + ' ' +  aliyun_ecs_list()
 	return flask.jsonify(errorcode='0', errormessage='', whitelist=list_str.split())
 
+@MemoizeWithTimeout(timeout=60)
 def aliyun_ecs_list():
 	from aliyunsdkcore import client
 	from aliyunsdkcore import request
