@@ -1,4 +1,5 @@
 from flask import Flask, request
+from caching import MemoizeWithTimeout
 import flask
 
 app = Flask(__name__, static_url_path='')
@@ -14,6 +15,7 @@ def allow(ip):
 	return ip in white_list or (white_ip_prefix and ip.startswith(white_ip_prefix))
 
 @app.route('/list')
+@MemoizeWithTimeout(timeout=60)
 def list():
 	#print(request.remote_addr)
 	if not allow(request.remote_addr):
